@@ -1,0 +1,89 @@
+body{
+	background-color: #114B5F;
+}
+
+.container {
+	display: flex;
+	justify-content: center;
+}
+
+#chat {
+	flex: 4;
+	overflow:   none;
+    position:   relative;
+    background-color: #F3E9D2;
+    border: 2px solid black;
+}
+
+#welcome{
+	background-color: #1A936F;
+	padding: 10px;
+	padding-top: 10px;
+	font-family: 'Bowlby One SC', cursive;
+	font-size: 30px;
+}
+
+#active_users{
+	flex: 1;
+}
+
+#messages {
+	overflow: auto;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    max-height: 45vh;
+    background-color: #F3E9D2;
+}
+
+#messages p {
+	font-family: 'Oxanium', cursive;
+}
+
+#users{
+	width: 100%;
+	height: 50vh;
+	background-color: #88D498;
+	border: 5px solid #F3E9D2;
+	overflow-y: scroll;
+	font-size: 16px;
+}
+
+#users p {
+	font-family: 'Oxanium', cursive;
+}
+
+#message{
+	width: 70%;
+	border: 3px solid black;
+	height: 5vh;
+	font-size: 16px;
+	background-color: #F3E9D2;
+}
+
+#send{
+	height: 5vh;
+	font-size: 20px;
+	background-color: #88D498;
+	color: white;
+}
+
+#header{
+	background-color: #C6DABF;
+	font-family: 'Cinzel', serif;
+	text-align: center;
+	padding: 10px;
+	margin-top: -5px;
+	margin-left: -5px;
+	margin-right: -5px;
+	font-size: 40px;
+}
+
+#active{
+	font-size: 24px;
+	font-family: 'Bowlby One SC', cursive;
+	text-align: center;
+	background-color: #1A936F;
+	margin-bottom: -1px;
+	margin-right: -5px;
+}

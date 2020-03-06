@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SENG513 Chatroom</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link href="https://fonts.googleapis.com/css?family=Oswald|Oxanium&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Bowlby+One+SC|Cinzel|Kalam&display=swap" rel="stylesheet">
+</head>
+<body>
+	<h1 id = "header">SENG513 Chatroom</h1>
+	<div class = "container">
+		<div id = "chat">
+			<p id = "welcome"><p>
+			<div id = "messages"></div>
+		</div>
+		<div id = "active_users">
+			<p id = "active">Active Users</p>
+			<div id = "users"></div>
+		</div>
+	</div>
+	<br>
+
+	<div>
+		<input type="text" name="message" id = "message" placeholder="Send a message">
+		<button id = "send">Send Message</button>
+	</div>
+
+	 <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="client.js"></script>
+</body>
+</html>
