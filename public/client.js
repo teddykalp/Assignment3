@@ -46,27 +46,40 @@ $(function(){
 		updateScroll();
 	});
 
+	var input = document.getElementById("message")
+
+	input.addEventListener("keyup", function(event) {
+  // Number 13 is the "Enter" key on the keyboard
+  	if (event.keyCode === 13) {
+    // Cancel the default action, if needed
+    event.preventDefault();
+    // Trigger the button element with a click
+    document.getElementById("send").click();
+  	}
+	});
+
 	/*when a message is sent*/
 	$("#send").click(function(e){
 		e.preventDefault();
 		if ($("#message").val() !== ""){
 			let message = $("#message").val();
-			let words = message.split(' ');
-
-			if (words[0] === '/nickcolor'){
-				newColor = words[1];
-				usercolor = "#"+newColor;
-				setCookie("userColor", usercolor, 365);
-				socket.emit("changedColors", nick, usercolor);
-			}
-			else if (words[0] === '/nick'){
-				var new_words = words.shift();
-				var newNick = words.join(" ")
-				oldNick = nick;
-				nick = newNick;
-				socket.emit("changedNick", oldNick, nick);
-				setCookie("userId", newNick, 365);
-				$('#welcome').text('Welcome ' + nick);
+			message = message.trimStart();
+			if (message.charAt(0) === "/"){
+				let words = message.split(' ');
+				if (words[0] === '/nickcolor'){
+					newColor = words[1];
+					usercolor = "#"+newColor;
+					setCookie("userColor", usercolor, 365);
+					socket.emit("changedColors", nick, usercolor);
+				}
+				else if (words[0] === '/nick'){
+					var new_words = words.shift();
+					var newNick = words.join(" ")
+					socket.emit("changedNick", nick, newNick);
+				}
+				else{
+					$("#messages").append('<p style = color:red>'+ 'Invalid \"/\" command!' + ' </p>');
+				}
 			}
 			else{
 				socket.emit('chat', message, nick, usercolor)
@@ -76,6 +89,11 @@ $(function(){
 	}
 	});
 
+	socket.on("changedNick", function(newNick){
+		nick = newNick;
+		setCookie("userId", nick, 365);
+		$('#welcome').text('Welcome ' + nick);
+	});
 
 	socket.on('chat', function(time,msg, name, color){
 		if (nick === name){

@@ -19,14 +19,10 @@ io.on('connection', function(socket){
 	/* anytime a user joins the chat, has a cookie or not*/
 	socket.on('new user', function(bool,name,usercolor){
 		if (bool != true){
-			var valid = true
-			while(valid){
-				var user = getRandomNick();
-				if(!checkforUser(user.nick)){
-					valid = false;
-					userList.push(user);
-				}
-				
+			var user = getRandomNick();
+			if(!checkforUser(user.nick)){
+				valid = false;
+				userList.push(user);
 			}
 		}
 		else{
@@ -41,6 +37,7 @@ io.on('connection', function(socket){
 			else{
 				user = getRandomNick();
 				userList.push(user);
+
 			}
 		}
 		socket.emit("name generated", user);
@@ -86,8 +83,9 @@ io.on('connection', function(socket){
 		        	break;
 				};
 			};
-			console.log(userList);
+			socket.emit("changedNick", newNick);
 			io.emit("updateUsers", userList);
+
 		}
 		else{
 			socket.emit("user taken", newNick);
@@ -110,7 +108,6 @@ io.on('connection', function(socket){
 	socket.on("disconnect", function(){
 		userList = [];
 		userCount = userCount - 1;
-		console.log(userCount);
 		io.emit("disconnected");
 	});
 
@@ -121,7 +118,7 @@ io.on('connection', function(socket){
 /* checking if user is part of array */
 function checkforUser(nick){
 	for (var i in userList){
-		if(userList[i].nick === nick){
+		if(userList[i].nick.toLowerCase() === nick.toLowerCase()){
 			return true;
 		}
 	}
@@ -173,8 +170,13 @@ function currentTime() {
         minute = "0" + minute;
     }
     if (hour >= 12){
-        hour = hour -12;
-        displayTime = hour + ":" + minute + "pm" + "   ";
+    	if (hour > 12){
+        	hour = hour -12;
+        	displayTime = hour + ":" + minute + "pm" + "   ";
+    	}
+    	else{
+    		displayTime = hour + ":" + minute + "pm" + "   ";
+    	}
     }
     else{
         displayTime = hour + ":" + minute + "am" + "   ";
