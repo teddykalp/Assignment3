@@ -63,9 +63,9 @@ $(function(){
 	/*when a message is sent*/
 	$("#send").click(function(e){
 		e.preventDefault();
-		if ($("#message").val() !== ""){
-			let message = $("#message").val();
-			message = message.trimStart();
+		let message = $("#message").val();
+		message = message.trimStart();
+		if (!checkForEmpty(message)){
 			if (message.charAt(0) === "/"){
 				let words = message.split(' ');
 				if (words[0] === '/nickcolor'){
@@ -164,4 +164,8 @@ function setCookie(cookiename, cookievalue, expirydays) {
   	d.setTime(d.getTime() + (expirydays * 24 * 60 * 60 * 1000));
   	var expires = "expires="+d.toUTCString();
   	document.cookie = cookiename + "=" + cookievalue + ";" + expires + ";path=/";
+}
+
+function checkForEmpty(value){
+	return (!value || value == undefined || value == "" || value.length == 0);
 }
