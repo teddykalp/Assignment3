@@ -20,7 +20,8 @@ body{
 	padding: 10px;
 	padding-top: 10px;
 	font-family: 'Bowlby One SC', cursive;
-	font-size: 30px;
+	font-size: 25px;
+	padding: 20px;
 }
 
 #active_users{
@@ -83,7 +84,7 @@ body{
 	font-size: 24px;
 	font-family: 'Bowlby One SC', cursive;
 	text-align: center;
-	background-color: #1A936F;
+	background-color: #C6DABF;
 	margin-bottom: -1px;
 	margin-right: -5px;
 }
